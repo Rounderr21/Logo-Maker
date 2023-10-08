@@ -16,6 +16,9 @@ function writeToFile(fileName, data) {
   
     // This is the data that is exported from the shapes.js
     let { triangle, circle, square } = shapes(data);
+    triangle.fillColor = data.backcolor;
+
+    console.log(triangle.fillColor);
 
     // Check the value of data.shape and include the corresponding shape in SVGContent.
     switch (data.shape) {
@@ -26,7 +29,7 @@ function writeToFile(fileName, data) {
           width="300" height="200"
           xmlns="http://www.w3.org/2000/svg">
 
-          ${triangle} fill ="${data.backcolor}" />
+          ${triangle} +++++ ${triangle.fillColor}
 
           <text x="150" y="125" font-size="60" text-anchor="middle" fill="${data.txtcolor}">${data.characters}</text>
 
