@@ -16,9 +16,10 @@ function writeToFile(fileName, data) {
   
     // This is the data that is exported from the shapes.js
     let { triangle, circle, square } = shapes(data);
-    triangle.fillColor = data.backcolor;
-
-    console.log(triangle.fillColor);
+    //setting the parameter of set color to the color the user inputs
+    triangle.setColor(data.backcolor);
+    circle.setColor(data.backcolor);
+    square.setColor(data.backcolor);
 
     // Check the value of data.shape and include the corresponding shape in SVGContent.
     switch (data.shape) {
@@ -29,7 +30,7 @@ function writeToFile(fileName, data) {
           width="300" height="200"
           xmlns="http://www.w3.org/2000/svg">
 
-          ${triangle} +++++ ${triangle.fillColor}
+          ${triangle.render(data)}
 
           <text x="150" y="125" font-size="60" text-anchor="middle" fill="${data.txtcolor}">${data.characters}</text>
 
@@ -43,7 +44,7 @@ function writeToFile(fileName, data) {
           width="300" height="200"
           xmlns="http://www.w3.org/2000/svg">
 
-          ${circle} fill ="${data.backcolor}" />
+          ${circle.render(data)}
 
           <text x="150" y="125" font-size="60" text-anchor="middle" fill="${data.txtcolor}">${data.characters}</text>
 
@@ -57,7 +58,7 @@ function writeToFile(fileName, data) {
           width="300" height="200"
           xmlns="http://www.w3.org/2000/svg">
 
-          ${square} fill ="${data.backcolor}" />
+          ${square.render(data)}
 
           <text x="150" y="125" font-size="60" text-anchor="middle" fill="${data.txtcolor}">${data.characters}</text>
 
