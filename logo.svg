@@ -1,12 +1,10 @@
 
-    <svg version="1.1"
-     width="300" height="200"
-     xmlns="http://www.w3.org/2000/svg">
+          <svg version="1.1"
+          width="300" height="200"
+          xmlns="http://www.w3.org/2000/svg">
 
-  ///////////////SHAPE THAT IS BEING USED IS GOING TO GO HERE///this spot will have to be generated in the shapes js
-  as it need to change based on what type of 
-  <circle cx="150" cy="100" r="80" fill="blue" />
+          <rect x="75" y="35" width="150" height="150" fill="blue" />
 
-  <text x="150" y="125" font-size="60" text-anchor="middle" fill="white">CMS</text>
+          <text x="150" y="125" font-size="60" text-anchor="middle" fill="white">CMS</text>
 
-</svg>
+          </svg>
