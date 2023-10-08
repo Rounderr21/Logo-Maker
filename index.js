@@ -1,8 +1,10 @@
+//importing shapes export and npm installs
 const inquirer = require('inquirer');
 const fs = require('fs');
 const convert = require('color-convert');
 const shapes = require('./lib/shapes');
 
+//list of questions to ask the user when prompted
 const questions = [
     'Please choose Three characters for your Logo.',
     'Please choose a text color for your logo(you may use a RGB number).',
@@ -16,6 +18,7 @@ function writeToFile(fileName, data) {
   
     // This is the data that is exported from the shapes.js
     let { triangle, circle, square } = shapes(data);
+
     //setting the parameter of set color to the color the user inputs
     triangle.setColor(data.backcolor);
     circle.setColor(data.backcolor);
@@ -23,6 +26,8 @@ function writeToFile(fileName, data) {
 
     // Check the value of data.shape and include the corresponding shape in SVGContent.
     switch (data.shape) {
+
+      //if user picks triangle this content will appear
       case 'triangle':
 
         SVGContent = `
@@ -36,7 +41,8 @@ function writeToFile(fileName, data) {
 
           </svg>`;
         break;
-  
+
+      //if user picks circle this content will appear
       case 'circle':
 
         SVGContent = `
@@ -50,7 +56,8 @@ function writeToFile(fileName, data) {
 
           </svg>`;
         break;
-  
+      
+      //if user picks square this content will appear
       case 'square':
 
         SVGContent = `
@@ -64,7 +71,8 @@ function writeToFile(fileName, data) {
 
           </svg>`;
         break;
-  
+      
+      //if user picks nothing from the list this content will appear as a backup
       default:
         // Handle the case when data.shape is not recognized.
         console.log('Invalid shape specified in data.');
@@ -90,6 +98,7 @@ const validateCharacters = (input) => {
     }
 };
 
+//validates if the user color is a actual color or not
 const validateColor = (input) => {
     try {
         // Try to convert the input to RGB color using color-convert
@@ -106,7 +115,7 @@ const validateColor = (input) => {
     
 };
 
-
+//using inquire to ask the questions to the user via the terminal.
 inquirer
     .prompt([
         {
