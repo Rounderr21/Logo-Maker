@@ -11,33 +11,72 @@ const questions = [
 ]
 
 function writeToFile(fileName, data) {
+    // Initialize SVGContent as an empty string.
+    let SVGContent = '';
+  
+    // This is the data that is exported from the shapes.js
+    let { triangle, circle, square } = shapes(data);
 
-    //comma here is used to make sure that shapes data is seperate and placed in the right places
-    //const hello = shapes(data);
+    // Check the value of data.shape and include the corresponding shape in SVGContent.
+    switch (data.shape) {
+      case 'triangle':
 
-    const SVGContent = 
-    `
-    <svg version="1.1"
-     width="300" height="200"
-     xmlns="http://www.w3.org/2000/svg">
+        SVGContent = `
+          <svg version="1.1"
+          width="300" height="200"
+          xmlns="http://www.w3.org/2000/svg">
 
-  ///////////////SHAPE THAT IS BEING USED IS GOING TO GO HERE///this spot will have to be generated in the shapes js
-  as it need to change based on what type of 
-  <${data.shape} cx="150" cy="100" r="80" fill="${data.backcolor}" />
+          ${triangle} fill ="${data.backcolor}" />
 
-  <text x="150" y="125" font-size="60" text-anchor="middle" fill="${data.txtcolor}">${data.characters}</text>
+          <text x="150" y="125" font-size="60" text-anchor="middle" fill="${data.txtcolor}">${data.characters}</text>
 
-</svg>`;
+          </svg>`;
+        break;
+  
+      case 'circle':
 
+        SVGContent = `
+          <svg version="1.1"
+          width="300" height="200"
+          xmlns="http://www.w3.org/2000/svg">
+
+          ${circle} fill ="${data.backcolor}" />
+
+          <text x="150" y="125" font-size="60" text-anchor="middle" fill="${data.txtcolor}">${data.characters}</text>
+
+          </svg>`;
+        break;
+  
+      case 'square':
+
+        SVGContent = `
+          <svg version="1.1"
+          width="300" height="200"
+          xmlns="http://www.w3.org/2000/svg">
+
+          ${square} fill ="${data.backcolor}" />
+
+          <text x="150" y="125" font-size="60" text-anchor="middle" fill="${data.txtcolor}">${data.characters}</text>
+
+          </svg>`;
+        break;
+  
+      default:
+        // Handle the case when data.shape is not recognized.
+        console.log('Invalid shape specified in data.');
+        return;
+    }
+  
+    // Write the SVGContent to the specified file.
     fs.writeFile(fileName, SVGContent, (error) => {
-        if (error) {
-          console.log('Error has occurred!');
-        } else {
-          console.log("Generated logo.svg");
-        }
-      });
-}
-
+      if (error) {
+        console.log('Error has occurred!');
+      } else {
+        console.log("Generated logo.svg");
+      }
+    });
+  }
+  
 //validates if the user has exactly three characters.
 const validateCharacters = (input) => {
     if (input.length === 3) {
@@ -93,8 +132,6 @@ inquirer
         },
     ]).then((response) =>
     {
-        console.log(response);
-
         //this sends the indo from the responses and sends it to the document to write//
         writeToFile('logo.svg', response);
     });
